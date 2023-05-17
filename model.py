@@ -28,8 +28,8 @@ class Character(db.Model):
 
     char_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     char_name = db.Column(db.String)
-    # user_id = db.Column(db.Integer)
-    # background_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.background_id"))
     bio = db.Column(db.Text)
     descrip = db.Column(db.Text)
 
@@ -48,15 +48,15 @@ class Background(db.Model):
     __tablename__ = 'backgrounds'
 
     background_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    back_name = db.Column(db.String, unique=True)
+    background_name = db.Column(db.String, unique=True)
     descrip = db.Column(db.Text)
 
-    def __init__(self, back_name, descrip):
-        self.back_name = back_name
+    def __init__(self, background_name, descrip):
+        self.background_name = background_name
         self.descrip = descrip
 
     def __repr__(self):
-        return f"<Background background_id={self.user_id} back_name={self.back_name}>"
+        return f"<Background background_id={self.user_id} background_name={self.background_name}>"
 
 
 class Weapon(db.Model):
@@ -94,6 +94,43 @@ class Armor(db.Model):
         return f"<Armor armor_id={self.armor_id} armor_name={self.armor_name}>"
 
 
+class Inv_Wep(db.Model):
+    __tablename__ = 'inv_weapons'
+
+    inv_wep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    wep_id = db.Column(db.Integer, db.ForeignKey("weapons.wep_id"))
+    char_id = db.Column(db.Integer, db.ForeignKey("characters.char_id"))
+    qty = db.Column(db.Integer)
+    is_equipped = db.Column(db.Boolean)
+
+    def __init__(self, wep_id, char_id, qty, is_equipped):
+        self.wep_id = wep_id
+        self.char_id = char_id
+        self.qty = qty
+        self.is_equipped = is_equipped
+
+    def __repr__(self):
+        return f"<Inv_wep id={self.inv_wep_id}>"
+
+
+class Inv_Armor(db.Model):
+    __tablename__ = 'inv_armors'
+
+    inv_armor_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    armor_id = db.Column(db.Integer, db.ForeignKey("armors.armor_id"))
+    char_id = db.Column(db.Integer, db.ForeignKey("characters.char_id"))
+    qty = db.Column(db.Integer)
+    is_equipped = db.Column(db.Boolean)
+
+    def __init__(self, armor_id, char_id, qty, is_equipped):
+        self.armor_id = armor_id
+        self.char_id = char_id
+        self.qty = qty
+        self.is_equipped = is_equipped
+
+
+    def __repr__(self):
+        return f"<Inv_Armor id={self.inv_armor_id}>"
 
 
 # Other necessities
