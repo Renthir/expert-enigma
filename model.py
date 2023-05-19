@@ -50,10 +50,12 @@ class Background(db.Model):
     background_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     background_name = db.Column(db.String, unique=True)
     descrip = db.Column(db.Text)
+    rp_boon = db.Column(db.Text)
 
-    def __init__(self, background_name, descrip):
+    def __init__(self, background_name, descrip, rp_boon):
         self.background_name = background_name
         self.descrip = descrip
+        self.rp_boon = rp_boon
 
     def __repr__(self):
         return f"<Background background_id={self.user_id} background_name={self.background_name}>"
@@ -103,11 +105,11 @@ class Inv_Wep(db.Model):
     qty = db.Column(db.Integer)
     is_equipped = db.Column(db.Boolean)
 
-    def __init__(self, wep_id, char_id, qty, is_equipped):
+    def __init__(self, wep_id, char_id, qty):
         self.wep_id = wep_id
         self.char_id = char_id
         self.qty = qty
-        self.is_equipped = is_equipped
+        self.is_equipped = False
 
     def __repr__(self):
         return f"<Inv_wep id={self.inv_wep_id}>"
@@ -122,11 +124,11 @@ class Inv_Armor(db.Model):
     qty = db.Column(db.Integer)
     is_equipped = db.Column(db.Boolean)
 
-    def __init__(self, armor_id, char_id, qty, is_equipped):
+    def __init__(self, armor_id, char_id, qty):
         self.armor_id = armor_id
         self.char_id = char_id
         self.qty = qty
-        self.is_equipped = is_equipped
+        self.is_equipped = False
 
 
     def __repr__(self):
