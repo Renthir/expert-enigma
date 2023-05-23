@@ -3,24 +3,32 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
 #Class tables
 
-class User(db.Model):
-    __tablename__ = 'users'
+class User(db.Model, UserMixin):
+    __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    is_admin = db.Column(db.Boolean)
+
+    characters = db.relationship("Character", backref="users", lazy=True)
 
     def __init__(self, email, password):
         self.email = email
         self.password = password
+        self.is_admin = False
 
     def __repr__(self):
         return f"<User user_id={self.user_id} email={self.email}>"
+    
+    def get_id(self):
+        return self.user_id
     
 
 class Character(db.Model):
