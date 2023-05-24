@@ -2,20 +2,24 @@
 
 import os
 from flask import Flask, render_template, request, flash, session, redirect
-from model import connect_to_db, db 
-# from flask_login import LoginManager, login_required, logout_user, current_user
+from model import connect_to_db, db, User 
+from flask_login import LoginManager, login_required, logout_user, current_user
 import crud
 
 from jinja2 import StrictUndefined
 
-# login_manager = LoginManager()
 
 app = Flask(__name__)
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
 
-# login_manager.init_app(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 # Routes
 
