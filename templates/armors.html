@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>Welcome to the sci-fi character tracker thing!</h1>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Armor</th>
+          <th scope="col">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for armor in armors %}
+        <tr>
+            <td>{{ armor.armor_name }}</td>
+            <td>{{ armor.armor_stat }}</td>
+            <td>{{ armor.armor_price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -36,20 +36,25 @@ def homepage():
 @app.route("/armors")
 def armors_page():
     """View Armor list"""
-    return render_template("armors.html")
+    armors = crud.get_armors()
+    #if logged in, render interactable armors page?
+    return render_template("armors.html", armors=armors)
 
 
 @app.route("/weapons")
 def weapons_page():
     """View Weapons list"""
-    return render_template("weapons.html")
+    weapons = crud.get_weapons
+    #if logged in, render interactable weapons page?
+    return render_template("weapons.html", weapons=weapons)
 
 
 @app.route("/characters")
 def characters_page():
     """Page that shows a user's characters and the option to create a new one"""
     #check session id to see if user is logged in, provide user's characters
-    return render_template("characters.html")
+    # characters = crud. get characters or something
+    return render_template("characters.html" characters=characters)
 
 
 @app.route("/create-character", methods=["GET", "POST"])
