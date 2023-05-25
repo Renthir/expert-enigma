@@ -30,6 +30,12 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return self.user_id
     
+    def check_password(self, password):
+        return password == self.password
+    
+    def check_admin(self):
+        return self.is_admin
+    
 
 class Character(db.Model):
     __tablename__ = 'characters'

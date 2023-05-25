@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>Welcome to the sci-fi character tracker thing!</h1>
+
+<div class="container">
+    <h2>Log In</h2>
+    <form action="/login" method="POST">
+      <p>
+        Email <input type="text" name="email">
+      </p>
+    
+      <p>
+        Password <input type="password" name="password">
+      </p>
+    
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+</div>
+
+<br>
+
+<div class="container">
+    <h2>Create an Account</h2>
+    <form action="/register" method="POST">
+      <p>
+        Email <input type="text" name="email">
+      </p>
+    
+      <p>
+        Password <input type="password" name="password">
+      </p>
+    
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+</div>
+
+
+
+{% endblock %}

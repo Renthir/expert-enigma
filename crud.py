@@ -1,6 +1,6 @@
 """CRUD Operations"""
 
-from model import User, Character, Background, Inv_Armor, Armor, Inv_Wep, Weapon
+from model import User, Character, Background, Inv_Armor, Armor, Inv_Wep, Weapon, connect_to_db
 
 #creation functions
 
@@ -41,4 +41,13 @@ def get_armors():
 
 def get_weapons():
     """Return all weapons"""
-    return Weapon.query.all
+    return Weapon.query.all()
+
+def get_characters(id):
+    return Character.query.filter(Character.user_id == id).all()
+
+
+#necesary junk
+if __name__ == "__main__":
+    from server import app
+    connect_to_db(app)
