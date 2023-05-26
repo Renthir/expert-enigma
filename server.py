@@ -55,17 +55,20 @@ def login():
 def register():
     return redirect("/")
 
+
+@app.route("/logout", methods=["GET"])
+def logout():
+    logout_user()
+    flash("Log Out Successful")
+    return redirect("/")
+
+
 @app.route("/armors")
 def armors_page():
     """View Armor list"""
     armors = crud.get_armors()
     return render_template("armors.html", armors=armors)
 
-@app.route("/logout", methods=["POST"])
-def logout():
-
-    flash("Log Out Successful")
-    return redirect("/")
 
 @app.route("/weapons")
 def weapons_page():
@@ -96,6 +99,7 @@ def character_creator():
 def character_details(char_id):
     """Shows character sheet, details, inventory"""
     return render_template("char_details.html")
+
 
 @app.route("/admin")
 @login_required
