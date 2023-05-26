@@ -2,5 +2,30 @@
 {% block main %}
 <h1>Welcome to the sci-fi character tracker thing!</h1>
 
+<h2>Create a character</h2>
+<form action="/create-character" method="POST">
+    <p>
+        Name: <input type="text" name="name">
+    </p>
+
+    <p>
+        Description: <textarea name="description" maxlength="2000"></textarea>
+    </p>
+
+    <p>
+        Biography: <textarea name="bio" maxlength="2000"></textarea>
+    </p>
+
+    <p>Background:</p>
+    <select class="form-select" aria-label="Select Background" name="background" style="display: inline;">
+        {% for back in backgrounds: %}
+        <option>{{ back.background_name }}</option>
+        {% endfor %}
+    </select>
+
+    <p>
+        <input type="submit">
+    </p>
+</form>
 
 {% endblock %}

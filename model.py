@@ -13,19 +13,19 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    email = db.Column(db.String, unique=True)
+    username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     is_admin = db.Column(db.Boolean)
 
     characters = db.relationship("Character", backref="users", lazy=True)
 
-    def __init__(self, email, password):
-        self.email = email
+    def __init__(self, username, password):
+        self.username = username
         self.password = password
         self.is_admin = False
 
     def __repr__(self):
-        return f"<User user_id={self.user_id} email={self.email}>"
+        return f"<User user_id={self.user_id} username={self.username}>"
     
     def get_id(self):
         return self.user_id

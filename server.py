@@ -31,9 +31,9 @@ def homepage():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    email = request.form.get("email")
+    username = request.form.get("username")
     password = request.form.get("password")
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(username=username).first()
 
     if request.method == 'POST':
         if user:
@@ -53,6 +53,16 @@ def login():
 
 @app.route("/register", methods=["POST"])
 def register():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    user = crud.get_user_by_username(username)
+    if user:
+        flash("Username already taken")
+    else:
+        user = crud.create_user(username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! Please log in.")
     return redirect("/")
 
 
@@ -64,6 +74,7 @@ def logout():
 
 
 @app.route("/armors")
+@login_required
 def armors_page():
     """View Armor list"""
     armors = crud.get_armors()
@@ -71,6 +82,7 @@ def armors_page():
 
 
 @app.route("/weapons")
+@login_required
 def weapons_page():
     """View Weapons list"""
     weapons = crud.get_weapons()
@@ -86,16 +98,30 @@ def characters_page():
 
 
 @app.route("/create-character", methods=["GET", "POST"])
+@login_required
 def character_creator():
     """Page that allows for character creation"""
-    #check session id for user's characters?
+    backgrounds = crud.get_backgrounds()
+
     if request.method == 'POST':
+        name = request.form.get("name")
+        desc = request.form.get("description")
+        bio = request.form.get("bio")
+        background = request.form.get("background") 
+        #background from the form returns a string, how do I get the selected option back?
+
+        char = crud.create_char(name, current_user.user_id, background.background_id, bio, desc)
+        db.session.add(char)
+        db.session.commit()
+
+        flash("Character created!")
         return redirect(f"/characters")
         
-    return render_template("character-creator.html")
+    return render_template("character-creator.html", backgrounds=backgrounds)
 
 
 @app.route("/character/<char_id>")
+@login_required
 def character_details(char_id):
     """Shows character sheet, details, inventory"""
     return render_template("char_details.html")

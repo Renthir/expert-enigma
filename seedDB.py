@@ -53,10 +53,10 @@ model.db.session.commit()
 
 
 for n in range(3):
-    email = f"user{n}@test.com"
+    username = f"user{n}"
     password = "test"
 
-    user = crud.create_user(email, password)
+    user = crud.create_user(username, password)
     model.db.session.add(user)
 
 model.db.session.commit()

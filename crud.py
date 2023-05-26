@@ -4,8 +4,8 @@ from model import User, Character, Background, Inv_Armor, Armor, Inv_Wep, Weapon
 
 #creation functions
 
-def create_user(email, password):
-    user = User(email, password)
+def create_user(username, password):
+    user = User(username, password)
     return user
 
 def create_char(char_name, user_id, background_id, bio, descrip):
@@ -45,6 +45,12 @@ def get_weapons():
 
 def get_characters(id):
     return Character.query.filter(Character.user_id == id).all()
+
+def get_backgrounds():
+    return Background.query.all()
+
+def get_user_by_username(username):
+    return User.query.filter(User.username == username).first()
 
 
 #necesary junk
