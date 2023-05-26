@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% block main %}
 <h1>Welcome to the sci-fi character tracker thing!</h1>
+<h2>{{ character.char_name }}</h2>
+<h3>{{ background.background_name }}</h3>
+<br>
+<h5>Description</h5>
+<p>{{ character.descrip }}</p>
+<br>
+<h5>Biography</h5>
+<p>{{ character.bio }}</p>
 
-
+<h4>Inventory</h4>
+<h5>Weapons:</h5>
+<div>
+    {% for wep in inv_weps %}
+    {% endfor %}
+</div>
+<h5>Armors:</h5>
+<div>
+    {% for armor in inv_arms %}
+    {% endfor %}
+</div>
 {% endblock %}

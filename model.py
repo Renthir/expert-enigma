@@ -119,10 +119,10 @@ class Inv_Wep(db.Model):
     qty = db.Column(db.Integer)
     is_equipped = db.Column(db.Boolean)
 
-    def __init__(self, wep_id, char_id, qty):
+    def __init__(self, wep_id, char_id):
         self.wep_id = wep_id
         self.char_id = char_id
-        self.qty = qty
+        self.qty = 1
         self.is_equipped = False
 
     def __repr__(self):
@@ -138,10 +138,10 @@ class Inv_Armor(db.Model):
     qty = db.Column(db.Integer)
     is_equipped = db.Column(db.Boolean)
 
-    def __init__(self, armor_id, char_id, qty):
+    def __init__(self, armor_id, char_id):
         self.armor_id = armor_id
         self.char_id = char_id
-        self.qty = qty
+        self.qty = 1
         self.is_equipped = False
 
 

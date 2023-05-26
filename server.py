@@ -108,9 +108,9 @@ def character_creator():
         desc = request.form.get("description")
         bio = request.form.get("bio")
         background = request.form.get("background") 
-        #background from the form returns a string, how do I get the selected option back?
+        print(background)
 
-        char = crud.create_char(name, current_user.user_id, background.background_id, bio, desc)
+        char = crud.create_char(name, current_user.user_id, int(background), bio, desc)
         db.session.add(char)
         db.session.commit()
 
@@ -124,7 +124,14 @@ def character_creator():
 @login_required
 def character_details(char_id):
     """Shows character sheet, details, inventory"""
-    return render_template("char_details.html")
+    #check if character belongs to current user, kick them back to character page if not
+    char = crud.get_char_by_id(char_id)
+    back = crud.get_background_by_id(char.background_id)
+    inv_weps, inv_arms = crud.get_inventory(char_id)
+    if char.user_id != current_user.user_id:
+        flash("Invalid Character Page")
+        return redirect("/characters")
+    return render_template("char-details.html", character=char, background=back, inv_weps=inv_weps, inv_arms=inv_arms)
 
 
 @app.route("/admin")
