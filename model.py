@@ -80,12 +80,14 @@ class Weapon(db.Model):
 
     wep_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     wep_name = db.Column(db.String, unique=True)
+    wep_type = db.Column(db.String)
     wep_dmg = db.Column(db.Integer)
     wep_range = db.Column(db.Integer)
     wep_price = db.Column(db.Integer)
 
-    def __init__(self, wep_name, wep_dmg, wep_range, wep_price):
+    def __init__(self, wep_name, wep_type, wep_dmg, wep_range, wep_price):
         self.wep_name = wep_name
+        self.wep_type = wep_type
         self.wep_dmg = wep_dmg
         self.wep_range = wep_range
         self.wep_price = wep_price
@@ -99,11 +101,13 @@ class Armor(db.Model):
 
     armor_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     armor_name = db.Column(db.String, unique=True)
+    armor_type = db.Column(db.String)
     armor_stat = db.Column(db.Integer)
     armor_price = db.Column(db.Integer)
 
-    def __init__(self, armor_name, armor_stat, armor_price):
+    def __init__(self, armor_name, armor_type, armor_stat, armor_price):
         self.armor_name = armor_name
+        self.armor_type = armor_type
         self.armor_stat = armor_stat
         self.armor_price = armor_price
     def __repr__(self):

@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 {% block main %}
 <h1>Welcome to the sci-fi character tracker thing!</h1>
-
-<table class="table table-dark table-striped">
-    <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Damage</th>
-          <th scope="col">Range</th>
-          <th scope="col">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for weapon in weapons %}
-        <tr>
-            <td>{{ weapon.wep_name }}</td>
-            <td>{{ weapon.wep_dmg }}</td>
-            <td>{{ weapon.wep_range }}</td>
-            <td>{{ weapon.wep_price }}</td>
-        </tr>
+<form action="/weapons" method="POST">
+    <h3>Select a Character</h3>
+    <select class="form-select" aria-label="Select Character" name="character">
+        {% for char in characters: %}
+        <option value="{{ char.char_id }}">{{ char. char_name }}</option>
         {% endfor %}
-    </tbody>
-</table>
+    </select>
+    <br>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Damage</th>
+                <th scope="col">Range</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for weapon in weapons %}
+            <tr>
+                <td>{{ weapon.wep_name }}</td>
+                <td>{{ weapon.wep_type }}</td>
+                <td>{{ weapon.wep_dmg }}</td>
+                <td>{{ weapon.wep_range }}</td>
+                <td>{{ weapon.wep_price }}</td>
+                <td><button type="submit" class="btn btn-primary" role="button" name="weapon"
+                        value="{{ weapon.wep_id }}">Add</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
 
 {% endblock %}

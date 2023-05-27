@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th scope="col">Name</th>
+                <th scope="col">Type</th>
                 <th scope="col">Armor</th>
                 <th scope="col">Price</th>
             </tr>
@@ -21,6 +22,7 @@
             {% for armor in armors %}
             <tr>
                 <td>{{ armor.armor_name }}</td>
+                <td>{{ armor.armor_type }}</td>
                 <td>{{ armor.armor_stat }}</td>
                 <td>{{ armor.armor_price }}</td>
                 <td><button type="submit" class="btn btn-primary" role="button" name="armor"

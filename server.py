@@ -87,18 +87,28 @@ def armors_page():
         inv_armor = crud.create_inv_armor(armor_id, int(char_id))
         db.session.add(inv_armor)
         db.session.commit()
-
         flash("Armor Added!")
 
     return render_template("armors.html", armors=armors, characters=chars)
 
 
-@app.route("/weapons")
+@app.route("/weapons", methods=["GET", "POST"])
 @login_required
 def weapons_page():
     """View Weapons list"""
     weapons = crud.get_weapons()
-    return render_template("weapons.html", weapons=weapons)
+    chars = crud.get_characters(current_user.user_id)
+
+    if request.method == "POST":
+        char_id = request.form.get("character")
+        wep_id = request.form.get("weapon")
+
+        inv_wep = crud.create_inv_weapon(wep_id, int(char_id))
+        db.session.add(inv_wep)
+        db.session.commit()
+        flash("Weapon Added!")
+    
+    return render_template("weapons.html", weapons=weapons, characters=chars)
 
 
 @app.route("/characters")
@@ -139,11 +149,11 @@ def character_details(char_id):
     #check if character belongs to current user, kick them back to character page if not
     char = crud.get_char_by_id(char_id)
     back = crud.get_background_by_id(char.background_id)
-    inv_weps, inv_arms = crud.get_inventory(char_id)
+    weapons, armors = crud.get_inventory(char_id)
     if char.user_id != current_user.user_id:
         flash("Invalid Character Page")
         return redirect("/characters")
-    return render_template("char-details.html", character=char, background=back, inv_weps=inv_weps, inv_arms=inv_arms)
+    return render_template("char-details.html", character=char, background=back, armors=armors, weapons=weapons)
 
 
 @app.route("/admin")

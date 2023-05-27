@@ -16,12 +16,12 @@ def create_background(background_name, descrip, rp_boon):
     background = Background(background_name, descrip, rp_boon)
     return background
 
-def create_weapon(wep_name, wep_dmg, wep_range, wep_price):
-    weapon = Weapon(wep_name, wep_dmg, wep_range, wep_price)
+def create_weapon(wep_name, wep_type, wep_dmg, wep_range, wep_price):
+    weapon = Weapon(wep_name, wep_type, wep_dmg, wep_range, wep_price)
     return weapon
 
-def create_armor(armor_name, armor_stat, armor_price):
-    armor = Armor(armor_name, armor_stat, armor_price)
+def create_armor(armor_name, armor_type, armor_stat, armor_price):
+    armor = Armor(armor_name, armor_type, armor_stat, armor_price)
     return armor
 
 def create_inv_weapon(wep_id, char_id):
@@ -59,8 +59,17 @@ def get_background_by_id(id):
     return Background.query.get(id)
 
 def get_inventory(id):
-    weps = Inv_Wep.query.filter(Inv_Wep.char_id == id).all()
-    arms = Inv_Armor.query.filter(Inv_Armor.char_id == id).all()
+    inv_weps = Inv_Wep.query.filter(Inv_Wep.char_id == id).all()
+    inv_arms = Inv_Armor.query.filter(Inv_Armor.char_id == id).all()
+
+    weps = []
+    for inv_wep in inv_weps:
+        weps.append(Weapon.query.filter(Weapon.wep_id == inv_wep.wep_id).first())
+
+    arms = []
+    for inv_armor in inv_arms:
+        arms.append(Armor.query.filter(Armor.armor_id == inv_armor.armor_id).first())
+
     return weps, arms
 
 #necesary junk

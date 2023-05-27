@@ -3,6 +3,8 @@
 <h1>Welcome to the sci-fi character tracker thing!</h1>
 <h2>{{ character.char_name }}</h2>
 <h3>{{ background.background_name }}</h3>
+<p>{{ background.descrip }}</p>
+<p>{{ background.rp_boon }}</p>
 <br>
 <h5>Description</h5>
 <p>{{ character.descrip }}</p>
@@ -13,12 +15,14 @@
 <h4>Inventory</h4>
 <h5>Weapons:</h5>
 <div>
-    {% for wep in inv_weps %}
+    {% for weapon in weapons %}
     <div class="card">
-        <h5 class="card-header">Featured</h5>
+        <h5 class="card-header">{{ weapon.wep_type}}</h5>
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">{{ weapon.wep_name }}</h5>
+            <p class="card-text">Damage: {{ weapon.wep_dmg }}</p>
+            <p class="card-text">Range: {{ weapon.wep_range }}</p>
+            <p class="card-text">Price: {{ weapon.wep_price }}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
@@ -26,12 +30,13 @@
 </div>
 <h5>Armors:</h5>
 <div>
-    {% for armor in inv_arms %}
+    {% for armor in armors %}
     <div class="card">
-        <h5 class="card-header">Featured</h5>
+        <h5 class="card-header">{{ armor.armor_type }}</h5>
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">{{ armor.armor_name }}</h5>
+            <p class="card-text">Armor: {{ armor.armor_stat }}</p>
+            <p class="card-text">Price: {{ armor.armor_price }}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
