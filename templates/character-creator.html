@@ -17,7 +17,7 @@
     </p>
 
     <p>Background:</p>
-    <select class="form-select" aria-label="Select Background" name="background" style="display: inline;">
+    <select class="form-select" aria-label="Select Background" name="background">
         {% for back in backgrounds: %}
         <option value="{{ back.background_id }}">{{ back.background_name }}</option>
         {% endfor %}

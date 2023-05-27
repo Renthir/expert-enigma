@@ -73,12 +73,24 @@ def logout():
     return redirect("/")
 
 
-@app.route("/armors")
+@app.route("/armors", methods=["GET", "POST"])
 @login_required
 def armors_page():
     """View Armor list"""
     armors = crud.get_armors()
-    return render_template("armors.html", armors=armors)
+    chars = crud.get_characters(current_user.user_id)
+
+    if request.method == "POST":
+        char_id = request.form.get("character")
+        armor_id = request.form.get("armor")
+
+        inv_armor = crud.create_inv_armor(armor_id, int(char_id))
+        db.session.add(inv_armor)
+        db.session.commit()
+
+        flash("Armor Added!")
+
+    return render_template("armors.html", armors=armors, characters=chars)
 
 
 @app.route("/weapons")

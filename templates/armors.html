@@ -1,24 +1,33 @@
 {% extends "base.html" %}
 {% block main %}
 <h1>Welcome to the sci-fi character tracker thing!</h1>
-
-<table class="table table-dark table-striped">
-    <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Armor</th>
-          <th scope="col">Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for armor in armors %}
-        <tr>
-            <td>{{ armor.armor_name }}</td>
-            <td>{{ armor.armor_stat }}</td>
-            <td>{{ armor.armor_price }}</td>
-        </tr>
+<form action="/armors" method="POST">
+    <h3>Select a Character</h3>
+    <select class="form-select" aria-label="Select Character" name="character">
+        {% for char in characters: %}
+        <option value="{{ char.char_id }}">{{ char.char_name }}</option>
         {% endfor %}
-    </tbody>
-</table>
-
+    </select>
+    <br>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Armor</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for armor in armors %}
+            <tr>
+                <td>{{ armor.armor_name }}</td>
+                <td>{{ armor.armor_stat }}</td>
+                <td>{{ armor.armor_price }}</td>
+                <td><button type="submit" class="btn btn-primary" role="button" name="armor"
+                        value="{{ armor.armor_id}}">Add</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
 {% endblock %}

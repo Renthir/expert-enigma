@@ -24,12 +24,12 @@ def create_armor(armor_name, armor_stat, armor_price):
     armor = Armor(armor_name, armor_stat, armor_price)
     return armor
 
-def create_inv_weapon(wep_id, char_id, qty):
-    inv_weapon = Inv_Wep(wep_id, char_id, qty)
+def create_inv_weapon(wep_id, char_id):
+    inv_weapon = Inv_Wep(wep_id, char_id)
     return inv_weapon
 
-def create_inv_armor(armor_id, char_id, qty):
-    inv_armor = Inv_Armor(armor_id, char_id, qty)
+def create_inv_armor(armor_id, char_id):
+    inv_armor = Inv_Armor(armor_id, char_id)
     return inv_armor
 
 
