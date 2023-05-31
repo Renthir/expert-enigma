@@ -2,18 +2,18 @@
 {% block main %}
 <h1>Welcome to the sci-fi character tracker thing!</h1>
 
-<h2>Create a character</h2>
-<form action="/create-character" method="POST">
+<h2>Edit Character Details</h2>
+<form action="/character/{{ character.char_id }}/edit" method="POST">
     <h4>
-        Name: <input type="text" name="name">
+        Name: <input type="text" name="name" placeholder="{{ character.char_name }}">
     </h4>
 
     <h4>
-        Description: <textarea name="description" maxlength="2000"></textarea>
+        Description: <textarea name="description" maxlength="2000">{{ character.descrip }}</textarea>
     </h4>
 
     <h4>
-        Biography: <textarea name="bio" maxlength="2000"></textarea>
+        Biography: <textarea name="bio" maxlength="2000">{{ character.bio }}</textarea>
     </h4>
 
     <h4>Background:</h4>

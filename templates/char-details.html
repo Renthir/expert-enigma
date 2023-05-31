@@ -11,7 +11,9 @@
 <br>
 <h5>Biography</h5>
 <p>{{ character.bio }}</p>
-
+<br>
+<a href="/character/{{ character.char_id }}/edit" class="btn btn-primary btn-sm">Edit</a>
+<br>
 <h4>Inventory</h4>
 <h5>Weapons:</h5>
 <div>
@@ -23,9 +25,9 @@
             <p class="card-text">Damage: {{ weapon.wep_dmg }}</p>
             <p class="card-text">Range: {{ weapon.wep_range }}</p>
             <p class="card-text">Price: {{ weapon.wep_price }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/delete_wep/{{ character.char_id }}/{{ weapon.wep_id }}" class="btn btn-primary btn-sm">Remove</a>
         </div>
-      </div>
+    </div>
     {% endfor %}
 </div>
 <h5>Armors:</h5>
@@ -37,9 +39,9 @@
             <h5 class="card-title">{{ armor.armor_name }}</h5>
             <p class="card-text">Armor: {{ armor.armor_stat }}</p>
             <p class="card-text">Price: {{ armor.armor_price }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/delete_arm/{{ character.char_id }}/{{ armor.armor_id }}" class="btn btn-primary btn-sm">Remove</a>
         </div>
-      </div>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

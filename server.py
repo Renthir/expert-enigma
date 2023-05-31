@@ -1,7 +1,7 @@
 """Server for Sci-fi TTRPG Character tracker"""
 
 import os
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from model import connect_to_db, db, User 
 from flask_login import LoginManager, login_required, logout_user, current_user, login_user
 import crud
@@ -12,6 +12,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = 'dev'
 app.jinja_env.undefined = StrictUndefined
+app.debug = True
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -146,14 +147,40 @@ def character_creator():
 @login_required
 def character_details(char_id):
     """Shows character sheet, details, inventory"""
-    #check if character belongs to current user, kick them back to character page if not
     char = crud.get_char_by_id(char_id)
     back = crud.get_background_by_id(char.background_id)
     weapons, armors = crud.get_inventory(char_id)
+
     if char.user_id != current_user.user_id:
         flash("Invalid Character Page")
         return redirect("/characters")
     return render_template("char-details.html", character=char, background=back, armors=armors, weapons=weapons)
+
+
+@app.route("/character/<char_id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_character(char_id):
+    char = crud.get_char_by_id(char_id)
+    backgrounds = crud.get_backgrounds()
+    #finish edit
+    if char.user_id != current_user.user_id:
+        flash("Invalid Request")
+        return redirect("/characters")
+    
+    if request.method == "POST":
+        name = request.form.get("name")
+        desc = request.form.get("description")
+        bio = request.form.get("bio")
+        background = request.form.get("background") 
+
+        # char = crud.create_char(name, current_user.user_id, int(background), bio, desc)
+        char.char_name = name
+        char.descrip = desc
+        char.bio = bio
+        char.background = int(background)
+        db.session.commit()
+
+    return render_template("edit-character.html", character=char, backgrounds=backgrounds)
 
 
 @app.route("/admin")
@@ -163,6 +190,42 @@ def admin():
         flash("Not Authorized")
         return redirect("/")
     return render_template("admin-forms.html")
+
+
+@app.route("/delete_arm/<char_id>/<armor_id>")
+@login_required
+def delete_inv_armor(char_id, armor_id):
+    char = crud.get_char_by_id(char_id)
+    inv_armor = crud.get_inv_armor(char_id, armor_id)
+    
+    if char.user_id != current_user.user_id:
+        flash("Invalid Request")
+        return redirect("/characters")
+    
+    if inv_armor:
+        db.session.delete(inv_armor)
+        db.session.commit()
+
+    flash("Item Deleted")
+    return redirect(url_for('character_details', char_id=char_id))
+
+@app.route("/delete_wep/<char_id>/<wep_id>")
+@login_required
+def delete_inv_wep(char_id, wep_id):
+    char = crud.get_char_by_id(char_id)
+    inv_wep = crud.get_inv_wep(char_id, wep_id)
+
+    if char.user_id != current_user.user_id:
+        flash("Invalid Request")
+        return redirect("/characters")
+    
+    if inv_wep:
+        db.session.delete(inv_wep)
+        db.session.commit()
+    
+    
+    flash("Item Deleted")
+    return redirect(url_for('character_details', char_id=char_id))
 
 
 if __name__ == "__main__":

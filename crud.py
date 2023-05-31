@@ -72,6 +72,15 @@ def get_inventory(id):
 
     return weps, arms
 
+def get_inv_armor(char_id, armor_id):
+    armor = Inv_Armor.query.filter(Inv_Armor.char_id == char_id and Inv_Armor.armor_id == armor_id).first()
+    return armor
+
+def get_inv_wep(char_id, wep_id):
+    weapon = Inv_Wep.query.filter(Inv_Wep.char_id == char_id and Inv_Wep.wep_id == wep_id).first()
+    return weapon
+
+
 #necesary junk
 if __name__ == "__main__":
     from server import app

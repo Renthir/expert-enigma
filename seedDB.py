@@ -27,7 +27,7 @@ weapons_data = [
 ]
 background_data = [
     {"name": "Urchin", "desc": "Grew up on the streets", "rp": "Advantage to survival roles"},
-    {"name": "Professor", "desc": "Had tenure at a university", "rp": "Advantage to history checks"}
+    {"name": "Professor", "desc": "Had tenure at a university", "rp": "Advantage to lore checks"}
 ]
 
 armors_db = []
