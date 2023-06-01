@@ -1,41 +1,43 @@
 {% extends "base.html" %}
 {% block main %}
-<h1>Welcome to the sci-fi character tracker thing!</h1>
-
-<div class="container">
-    <h2>Log In</h2>
-    <form action="/login" method="POST">
-      <p>
-        Username <input type="text" name="username">
-      </p>
+<h1 style="text-align: center;">Desher Synergystics Conglomerate</h1>
+<h2 style="text-align: center;">Please enter your credentials</h2>
+<hr>
+<div class="container-fluid d-flex justify-content-around gap-5">
+  <div class="container box">
+      <h2>Log In</h2>
+      <form action="/login" method="POST">
+        <p>
+          Username <input type="text" name="username">
+        </p>
+      
+        <p>
+          Password <input type="password" name="password">
+        </p>
+      
+        <p>
+          <input type="submit">
+        </p>
+      </form>
+  </div>
     
-      <p>
-        Password <input type="password" name="password">
-      </p>
-    
-      <p>
-        <input type="submit">
-      </p>
-    </form>
-</div>
-
-<br>
-
-<div class="container">
-    <h2>Create an Account</h2>
-    <form action="/register" method="POST">
-      <p>
-        Username <input type="text" name="username">
-      </p>
-    
-      <p>
-        Password <input type="password" name="password">
-      </p>
-    
-      <p>
-        <input type="submit">
-      </p>
-    </form>
+  <div class="container box">
+      <h2>Create an Account</h2>
+      <form action="/register" method="POST">
+        <p>
+          Username <input type="text" name="username">
+        </p>
+      
+        <p>
+          Password <input type="password" name="password">
+        </p>
+      
+        <p>
+          <input type="submit">
+        </p>
+      </form>
+  
+  </div>
 
 </div>
 

@@ -1,19 +1,22 @@
 {% extends "base.html" %}
 {% block main %}
-<h1>Welcome to the sci-fi character tracker thing!</h1>
+<h1 style="text-align: center;">Desher Synergystics Conglomerate</h1>
 <h2>Your caracters</h2>
 
-{% for char in characters %}
-<div class="card">
-    <div class="card-body d-flex justify-content-between align-items-center">
-        <div class="container">
-            <h5 class="card-title">||  {{ char.char_name }}  ||</h5>
-            <!-- <p class="card-text"></p> -->
+<div class="container-fluid">
+    {% for char in characters %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div class="container">
+                <h5 class="card-title">||  {{ char.char_name }}  ||</h5>
+                <!-- <p class="card-text"></p> -->
+            </div>
+            <a class="btn btn-primary" role="button" href="/character/{{ char.char_id }}">Details</a>
         </div>
-        <a class="btn btn-primary" role="button" href="/character/{{ char.char_id }}">Details</a>
     </div>
+    {% endfor %}
+    
 </div>
-{% endfor %}
 
 <br>
 <a href="/create-character" class="btn btn-primary" role="button">Create a Character</a>

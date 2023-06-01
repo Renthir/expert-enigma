@@ -1,0 +1,16 @@
+#home {
+
+}
+
+.box {
+    border: solid 1px;
+    border-radius: 8px;
+    border-color: rgba(var(--bs-secondary-color-rgb), .5);
+    padding: 15px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
