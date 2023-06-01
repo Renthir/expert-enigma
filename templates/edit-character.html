@@ -1,29 +1,38 @@
 {% extends "base.html" %}
 {% block main %}
 <h1 style="text-align: center;">Desher Synergystics Conglomerate</h1>
+<hr>
 
 <h2>Edit Character Details</h2>
-<form action="/character/{{ character.char_id }}/edit" method="POST">
-    <h4>
-        Name: <input type="text" name="name" placeholder="{{ character.char_name }}">
-    </h4>
+<br>
+<form action="/character/{{ character.char_id }}/edit" method="POST" class="container-fluid d-flex gap-5 flex-wrap justify-content-center">
+    <div class="big-box">
+        <h4>Name:</h4>
+        <br>
+        <input type="text" name="name" placeholder="{{ character.char_name }}" style="width: 33rem;">
+    </div>
 
-    <h4>
-        Description: <textarea name="description" maxlength="2000">{{ character.descrip }}</textarea>
-    </h4>
+    <div class="big-box">
+        <h4>Description:</h4>
+        <textarea name="description" maxlength="2000" style="width: 33rem;">{{ character.descrip }}</textarea>
+    </div>
 
-    <h4>
-        Biography: <textarea name="bio" maxlength="2000">{{ character.bio }}</textarea>
-    </h4>
+    <div class="big-box">
+        <h4>Biography:</h4>
+        <textarea name="bio" maxlength="2000" style="width: 33rem;">{{ character.bio }}</textarea>
+    </div>
 
-    <h4>Background:</h4>
-    <select class="form-select" aria-label="Select Background" name="background">
-        {% for back in backgrounds: %}
-        <option value="{{ back.background_id }}">{{ back.background_name }}</option>
-        {% endfor %}
-    </select>
+    <div class="big-box">
+        <h4>Background:</h4>
+        <br>
+        <select class="form-select" aria-label="Select Background" name="background">
+            {% for back in backgrounds: %}
+            <option value="{{ back.background_id }}">{{ back.background_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
     
-    <p><input type="submit"></p>
+    <p><input type="submit" class="btn btn-primary"></p>
 </form>
 
 {% endblock %}
