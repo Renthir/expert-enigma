@@ -19,15 +19,18 @@ model.db.create_all()
 
 armors_data = [
     {"name": "Obsidian Assault Suit", "type": "Flack", "armor": 5, "price": 500},
-    {"name": "Void-Walker Carapace", "type": "Exosuit", "armor": 10, "price": 1000}
+    {"name": "Void-Walker Carapace", "type": "Powered", "armor": 15, "price": 2500},
+    {"name": "Eclipse Vanguard", "type": "Exosuit", "armor": 10, "price": 1500}
 ]
 weapons_data = [
     {"name": "Sand Caster", "type": "Macron", "dmg": 15, "range": 15, "price": 15000},
-    {"name": "Quench-gun", "type": "Kinetic", "dmg": 4, "range": 500, "price": 500}
+    {"name": "Quench-gun", "type": "Kinetic", "dmg": 4, "range": 250, "price": 500},
+    {"name": "Lumin Rifle", "type": "Lasing", "dmg": 3, "range": 5000, "price": 5000}
 ]
 background_data = [
-    {"name": "Urchin", "desc": "Grew up on the streets", "rp": "Advantage to survival roles"},
-    {"name": "Professor", "desc": "Had tenure at a university", "rp": "Advantage to lore checks"}
+    {"name": "Urchin", "desc": "Living on the streets in an urban world, you grew up fast and learned how to survive with little means. ", "rp": "You have a bonus to hiding in an urban environment, as well as to survival."},
+    {"name": "Professor", "desc": "You've made your life in learning, received a good education and decided to pass on what you know, for one reason or another.", "rp": "You have a bonus to history and research rolls ."},
+    {"name": "Mercenary", "desc": "A life of violence in exchange for cash. Maybe you justified it somehow, maybe you only took on contracts to defend the innocent. In any case, you've opted for a change. You do similar work now, but it's always for the innocent, and always for free. ", "rp": "ou get a bonus to strength and dexterity in combat."}
 ]
 
 armors_db = []
