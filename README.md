@@ -1,4 +1,4 @@
-# Python Capstone
+# DSC - Character Tracker
 Project: A site for potential players in a homebrew ttrpg campaign to make/track their characters
 ## MVP Features
 Registration/login to the site.
@@ -16,4 +16,4 @@ Flask
 SQLAlchemy
 HTML
 CSS
--possible others
+
